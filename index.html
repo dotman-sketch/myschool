@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Fountain College</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  text-align: center;
+  background-image: url("logo.png.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ADMIN LINK */
+.admin-link {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #007bff;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 1001;
+}
+.admin-link:hover { background: #0056b3; }
+
+/* HEADER */
+header {
+  background: #003366;
+  color: white;
+  padding: 20px;
+  padding-left: 220px;
+  position: relative;
+}
+
+header h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 900;
+  font-size: 2.6rem;
+  margin: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+}
+
+/* SIDEBAR NAV */
+.menu-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 26px;
+  cursor: pointer;
+  display: none;
+}
+
+.dropdown {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 200px;
+  background: #003366;
+  color: white;
+  padding-top: 80px;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+  text-align: left;
+  z-index: 1000;
+}
+
+.dropdown a {
+  display: block;
+  padding: 12px 18px;
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.dropdown a:hover { background: rgba(255,255,255,0.08); }
+
+/* SECTION */
+section {
+  padding: 30px;
+  margin-left: 220px;
+}
+
+.map-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  margin: 15px 0;
+}
+
+.map-container iframe {
+  width: 90%;
+  height: 350px;
+  border: 0;
+  border-radius: 8px;
+}
+
+.logout-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: crimson;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+footer {
+  background: #003366;
+  color: white;
+  padding: 15px;
+  margin-top: 40px;
+}
+
+.motto { font-style: italic; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .menu-icon { display: block; }
+  .dropdown { display: none; }
+  header { padding-left: 60px; }
+  header h1 { font-size: 1.6rem; }
+  section { margin-left: 0; }
+}
+
+</style>
+</head>
+
+<body>
+
+<script>
+/* PAGE PROTECTION — must match sessionStorage set in login.html */
+(function protect(){
+  const user = sessionStorage.getItem('loggedInUser');
+  if(!user){
+    window.location.replace('login.html');
+  }
+})();
+</script>
+
+<script>
+/* LOAD SERVER-EDITED VERSION OF THIS PAGE IF ONE EXISTS */
+(function(){
+  const filename = location.pathname.split('/').pop() || 'index.html';
+  fetch('/page/' + filename + '/edited')
+    .then(r => r.ok ? r.text() : '')
+    .then(t => {
+      if(t && t.trim().length){
+        document.documentElement.innerHTML = t;
+      }
+    })
+    .catch(e => console.error('Failed to load edited page:', e));
+})();
+</script>
+
+<header>
+  <h1>Life Fountain College</h1>
+  <a href="admin.html" class="admin-link">Admin</a>
+  <div class="menu-icon" onclick="toggleMenu(event)">⋮</div>
+
+  <div class="dropdown" id="menu">
+    <a href="about.html">About</a>
+    <a href="gallery.html">School Gallery</a>
+    <a href="admissions.html">Admissions</a>
+  </div>
+</header>
+
+<section>
+  <p>Where learning meets excellence.</p>
+
+  <a href="https://www.google.com/maps/search/?api=1&query=8.50446,3.42121"
+     target="_blank"
+     class="map-btn"
+     rel="noopener noreferrer">
+    📍 View Our Location on Google Maps
+  </a>
+
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.018740082821!2d3.42121!3d8.50446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10372f4ec8c8cb8b%3A0x98d40e0a7a72c55d!2sAgo%20Are%2C%20Oyo%20State%2C%20Nigeria!5e0!3m2!1sen!2sng!4v1692600000000!5m2!1sen!2sng"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <button class="logout-btn" onclick="logout()">Log Out</button>
+</section>
+
+<footer>
+  <p class="motto">"Bedrock of Excellence"</p>
+  <p>&copy; 2026 Life Fountain College. All rights reserved.</p>
+</footer>
+
+<script>
+
+/* LOGOUT */
+function logout(){
+  sessionStorage.removeItem('loggedInUser');
+  window.location.replace('login.html');
+}
+
+/* TOGGLE MOBILE MENU — stopPropagation prevents window.onclick closing it instantly */
+function toggleMenu(e){
+  e.stopPropagation();
+  const menu = document.getElementById('menu');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
+/* CLOSE MENU WHEN CLICKING OUTSIDE */
+window.addEventListener('click', function(){
+  const menu = document.getElementById('menu');
+  if(menu) menu.style.display = 'none';
+});
+
+</script>
+
+</body>
+</html>

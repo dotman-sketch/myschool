@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About - Life Fountain College</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Poppins', Arial, sans-serif; margin:0; color:#fff; background: url('logo.png.jpeg') center/cover no-repeat; }
+  body::before { content:""; position: fixed; inset:0; background: rgba(0,0,0,0.32); z-index:0; }
+  header{ background:#003366; color:white; padding:20px; padding-left:220px; position:relative; z-index:1; }
+  header h1{ font-family:'Playfair Display', Georgia, serif; text-transform:uppercase; letter-spacing:2px; margin:0; font-weight:900; font-size:2rem; text-shadow:0 3px 8px rgba(0,0,0,0.4); }
+  .dropdown{ display:block; position:fixed; left:0; top:0; height:100%; width:200px; background:#003366; color:white; padding-top:80px; box-shadow:2px 0 8px rgba(0,0,0,0.15); text-align:left; z-index:1000; }
+  .dropdown a{ display:block; padding:12px 18px; color:white; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.04); }
+  .dropdown a:hover{ background:rgba(255,255,255,0.06); }
+  section{ margin-left:220px; padding:30px; z-index:1; position:relative; }
+  .card{ background: rgba(0,0,0,0.5); padding:22px; border-radius:8px; max-width:900px; margin:auto; }
+  h2{ margin-top:0; font-family:'Playfair Display', Georgia, serif; }
+  footer{ margin-left:220px; padding:15px; background:#003366; color:white; text-align:center; position:relative; z-index:1; margin-top:40px; }
+</style>
+</head>
+<body>
+<script>
+if(location.port !== "3000"){
+  location.href = "http://localhost:3000" + location.pathname + location.search + location.hash;
+}
+</script>
+<script>
+(function(){
+  const filename = location.pathname.split('/').pop();
+  fetch('/page/'+filename+'/edited')
+    .then(r=>{
+      if(r.ok) return r.text();
+      return '';
+    })
+    .then(t=>{
+      if(t && t.trim().length){
+        document.open();
+        document.write(t);
+        document.close();
+      }
+    })
+    .catch(e=>console.error('Failed to load edited page:', e));
+})();
+</script>
+  <div class="dropdown" id="menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="gallery.html">School Gallery</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="admin.html">Admin</a>
+  </div>
+
+  <header>
+    <h1>Life Fountain College</h1>
+  </header>
+
+  <section>
+    <div class="card">
+      <h2>About Life Fountain College</h2>
+      <p><strong>Mission:</strong> To provide quality, value-driven education that equips students with the knowledge, skills and character to excel in life.</p>
+      <h3>Our Vision</h3>
+      <p>To be a leading institution recognized for academic excellence, moral integrity and community service.</p>
+      <h3>Our History</h3>
+      <p>Founded with a commitment to holistic education, Life Fountain College has served the Ago Are/Ofiki community for many years, nurturing generations of learners.</p>
+      <h3>Contact</h3>
+      <p>Email: info@lifefountaincollegeagoare| Phone: +234 8163391950</p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="motto">"Bedrock of Excellence"</p>
+    <p>&copy; 2026 Life Fountain College. All rights reserved.</p>
+  </footer>
+</body>
+</html>

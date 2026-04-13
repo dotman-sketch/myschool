@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIFE FOUNTAIN COLLEGE - Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: url('logo.png.jpeg') no-repeat center center / cover;
+      position: relative;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.72);
+      padding: 36px 32px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .school-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      line-height: 1.5;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 5px;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.07);
+      color: white;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .form-group input::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .error-msg {
+      background: rgba(220, 53, 69, 0.18);
+      border: 1px solid rgba(220, 53, 69, 0.4);
+      color: #ff8a94;
+      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      display: none;
+      text-align: left;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 11px;
+      margin-top: 6px;
+      border: none;
+      border-radius: 6px;
+      background: #007bff;
+      color: white;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: #0062cc; }
+    .btn-primary:active { background: #004fa3; }
+    .btn-primary:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0;
+      color: rgba(255,255,255,0.3);
+      font-size: 12px;
+    }
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      margin-bottom: 10px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.35);
+    }
+
+    .forgot-link {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 13px;
+      color: #ffc107;
+      text-decoration: none;
+    }
+    .forgot-link:hover { text-decoration: underline; }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 14px 20px;
+      background: rgba(0, 0, 0, 0.75);
+      color: white;
+      width: 100%;
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 20px;
+    }
+
+    footer .motto {
+      font-style: italic;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    footer .copyright {
+      font-size: 11px;
+      margin-top: 4px;
+      opacity: 0.65;
+    }
+
+    /* signup modal overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #1a1a2e;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 32px;
+      width: 100%;
+      max-width: 360px;
+      color: white;
+      position: relative;
+    }
+
+    .modal h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .modal .close-btn {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal .close-btn:hover { color: white; }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN CARD -->
+  <div class="login-container">
+    <p class="school-name">Welcome to<br>Life Fountain College<br>Ago Are / Ofiki Portal</p>
+
+    <div class="error-msg" id="loginError"></div>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter your username" autocomplete="username">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+    </div>
+
+    <button class="btn-primary" id="loginBtn" onclick="login()">Login</button>
+
+    <a href="#" class="forgot-link" onclick="openForgot(event)">Forgot Password?</a>
+
+    <div class="divider">or</div>
+
+    <button class="btn-secondary" onclick="openSignup()">Create Account</button>
+  </div>
+
+  <footer>
+    <p class="motto">"Bedrock of Excellence"</p>
+    <p class="copyright">&copy; 2026 Life Fountain College, Ago Are/Ofiki. All rights reserved.</p>
+  </footer>
+
+  <!-- SIGNUP MODAL -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <button class="close-btn" onclick="closeSignup()">&times;</button>
+      <h2>Create Account</h2>
+
+      <div class="error-msg" id="signupError"></div>
+
+      <div class="form-group">
+        <label for="newUsername">Username</label>
+        <input type="text" id="newUsername" placeholder="Choose a username">
+      </div>
+      <div class="form-group">
+        <label for="newPassword">Password</label>
+        <input type="password" id="newPassword" placeholder="Choose a password">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Repeat your password">
+      </div>
+      <button class="btn-primary" onclick="signup()">Create Account</button>
+    </div>
+  </div>
+
+  <!-- FORGOT PASSWORD MODAL -->
+  <div class="modal-overlay" id="forgotModal">
+    <div class="modal">
+      <button class="close-btn" onclick="closeForgot()">&times;</button>
+      <h2>Reset Password</h2>
+      <p style="font-size:13px; color:rgba(255,255,255,0.6); margin-bottom:18px;">
+        Enter your username and new password below.
+      </p>
+
+      <div class="error-msg" id="forgotError"></div>
+
+      <div class="form-group">
+        <label for="resetUsername">Username</label>
+        <input type="text" id="resetUsername" placeholder="Your username">
+      </div>
+      <div class="form-group">
+        <label for="resetPassword">New Password</label>
+        <input type="password" id="resetPassword" placeholder="New password">
+      </div>
+      <button class="btn-primary" onclick="resetPassword()">Reset Password</button>
+    </div>
+  </div>
+
+  <script>
+    /* ── ALREADY LOGGED IN ── */
+    (function(){
+      if(sessionStorage.getItem('loggedInUser')){
+        window.location.replace('index.html');
+      }
+    })();
+
+    /* ── HELPERS ── */
+    function showError(id, msg){
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+    function clearError(id){
+      const el = document.getElementById(id);
+      el.textContent = '';
+      el.style.display = 'none';
+    }
+
+    /* ── LOGIN ── */
+    function login(){
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      clearError('loginError');
+
+      if(!username || !password){
+        showError('loginError', 'Please enter both username and password.');
+        return;
+      }
+
+      const btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      btn.textContent = 'Logging in…';
+
+      fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(r => r.json())
+      .then(resp => {
+        if(resp.success){
+          sessionStorage.setItem('loggedInUser', username);
+          window.location.replace('index.html');
+        } else {
+          showError('loginError', resp.error || 'Invalid username or password.');
+          btn.disabled = false;
+          btn.textContent = 'Login';
+        }
+      })
+      .catch(() => {
+        showError('loginError', 'Network error. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Login';
+      });
+    }
+
+    /* ── ENTER KEY ── */
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        const signupOpen = document.getElementById('signupModal').classList.contains('open');
+        const forgotOpen = document.getElementById('forgotModal').classList.contains('open');
+        if(signupOpen) signup();
+        else if(forgotOpen) resetPassword();
+        else login();
+      }
+    });
+
+    /* ── SIGNUP MODAL ── */
+    function openSignup(){
+      clearError('signupError');
+      document.getElementById('signupModal').classList.add('open');
+    }
+    function closeSignup(){
+      document.getElementById('signupModal').classList.remove('open');
+    }
+
+    function signup(){
+      const username = document.getElementById('newUsername').value.trim();
+      const password = document.getElementById('newPassword').value;
+      const confirm  = document.getElementById('confirmPassword').value;
+      clearError('signupError');
+
+      if(!username || !password || !confirm){
+        showError('signupError', 'Please fill in all fields.');
+        return;
+      }
+      if(password.length < 6){
+        showError('signupError', 'Password must be at least 6 characters.');
+        return;
+      }
+      if(password !== confirm){
+        showError('signupError', 'Passwords do not match.');
+        return;
+      }
+
+      fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(r => r.json())
+      .then(resp => {
+        if(resp.success){
+          closeSignup();
+          sessionStorage.setItem('loggedInUser', username);
+          window.location.replace('index.html');
+        } else {
+          showError('signupError', resp.error || 'Could not create account.');
+        }
+      })
+      .catch(() => showError('signupError', 'Network error. Please try again.'));
+    }
+
+    /* ── FORGOT PASSWORD MODAL ── */
+    function openForgot(e){
+      e.preventDefault();
+      clearError('forgotError');
+      document.getElementById('forgotModal').classList.add('open');
+    }
+    function closeForgot(){
+      document.getElementById('forgotModal').classList.remove('open');
+    }
+
+    function resetPassword(){
+      const username = document.getElementById('resetUsername').value.trim();
+      const password = document.getElementById('resetPassword').value;
+      clearError('forgotError');
+
+      if(!username || !password){
+        showError('forgotError', 'Please fill in all fields.');
+        return;
+      }
+      if(password.length < 6){
+        showError('forgotError', 'Password must be at least 6 characters.');
+        return;
+      }
+
+      fetch('/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(r => r.json())
+      .then(resp => {
+        if(resp.success){
+          closeForgot();
+          alert('Password reset successfully. You can now log in.');
+        } else {
+          showError('forgotError', resp.error || 'Username not found.');
+        }
+      })
+      .catch(() => showError('forgotError', 'Network error. Please try again.'));
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery - Life Fountain College</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script>
+if(location.port !== "3000"){
+  location.href = "http://localhost:3000" + location.pathname + location.search + location.hash;
+}
+</script>
+<style>
+  :root{ --sidebar-w:200px; }
+  body{ font-family:'Poppins', Arial, sans-serif; margin:0; color:#fff; background:url('logo.png.jpeg') center/cover no-repeat; }
+  body::before{ content:''; position:fixed; inset:0; background:rgba(0,0,0,0.32); z-index:0; }
+  header{ background:#003366; color:#fff; padding:20px; padding-left:calc(var(--sidebar-w) + 20px); position:relative; z-index:1; }
+  header h1{ font-family:'Playfair Display', Georgia, serif; text-transform:uppercase; letter-spacing:2px; margin:0; font-weight:900; font-size:1.8rem; }
+  .dropdown{ display:block; position:fixed; left:0; top:0; height:100%; width:var(--sidebar-w); background:#003366; color:white; padding-top:80px; box-shadow:2px 0 8px rgba(0,0,0,0.15); text-align:left; z-index:1000; }
+  .dropdown a{ display:block; padding:12px 18px; color:white; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.04); }
+  .dropdown a:hover{ background:rgba(255,255,255,0.06); }
+  section{ margin-left:var(--sidebar-w); padding:28px; z-index:1; position:relative; }
+  .card{ background: rgba(0,0,0,0.48); padding:18px; border-radius:8px; max-width:1200px; margin:auto; }
+  h2{ margin-top:0; font-family:'Playfair Display', Georgia, serif; }
+
+  /* Hero image + title */
+  .hero{ max-width:1200px; margin:0 auto 18px; border-radius:10px; overflow:hidden; }
+  .hero img{ width:100%; height:320px; object-fit:cover; display:block; filter:brightness(0.95); }
+  .page-title{ text-align:center; margin:12px 0 0; font-size:1.6rem; }
+
+  /* Gallery grid */
+  .grid{ display:grid; gap:14px; margin-top:16px; grid-template-columns:repeat(1,1fr); }
+  @media(min-width:600px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+  @media(min-width:900px){ .grid{ grid-template-columns:repeat(3,1fr); } }
+  @media(min-width:1200px){ .grid{ grid-template-columns:repeat(4,1fr); } }
+
+  .grid figure{ margin:0; border-radius:8px; overflow:hidden; background:rgba(255,255,255,0.02); }
+  .grid img{ width:100%; height:220px; object-fit:cover; display:block; transition:transform .36s cubic-bezier(.2,.8,.2,1), box-shadow .36s; cursor:pointer; }
+  .grid figure:hover img{ transform:scale(1.06); }
+  .grid figure:hover{ box-shadow:0 16px 36px rgba(0,0,0,0.55); }
+  figcaption{ text-align:center; padding:8px 6px; color:#fff; font-size:0.95rem; }
+
+  /* Lightbox */
+  .lightbox{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.85); z-index:2000; }
+  .lightbox img{ max-width:90%; max-height:86%; border-radius:6px; box-shadow:0 10px 40px rgba(0,0,0,0.6); }
+  .lightbox .close{ position:absolute; top:18px; right:22px; color:#fff; font-size:28px; cursor:pointer; }
+
+  footer{ margin-left:var(--sidebar-w); padding:15px; background:#003366; color:white; text-align:center; position:relative; z-index:1; margin-top:30px; }
+
+  @media (max-width:700px){
+    header{ padding-left:20px; }
+    section{ margin-left:0; padding:18px; }
+    .dropdown{ position:relative; width:100%; height:auto; display:flex; gap:8px; padding:12px; }
+  }
+</style>
+</head>
+<body>
+<script>
+(function(){
+  const filename = location.pathname.split('/').pop();
+  fetch('/page/'+filename+'/edited')
+    .then(r=>{
+      if(r.ok) return r.text();
+      return '';
+    })
+    .then(t=>{
+      if(t && t.trim().length){
+        document.open();
+        document.write(t);
+        document.close();
+      }
+    })
+    .catch(e=>console.error('Failed to load edited page:', e));
+})();
+</script>
+  <div class="dropdown" id="menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="gallery.html">School Gallery</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="admin.html">Admin</a>
+  </div>
+
+  <header>
+    <h1>Life Fountain College</h1>
+  </header>
+
+  <section>
+    <div class="card">
+      <div class="hero">
+        <img src="school-bg.jpg.jpeg" alt="Campus panoramic view">
+      </div>
+      <h2 class="page-title">School Gallery</h2>
+      <p style="text-align:center; max-width:900px; margin:6px auto 0;">Browse photos from around our school campus and events. Click any image to enlarge.</p>
+
+      <div class="grid" id="galleryGrid">
+        <!-- Figures with centered captions -->
+        <figure>
+          <img src="school-bg.jpg.jpeg" alt="Campus view 1">
+          <figcaption>Campus View</figcaption>
+        </figure>
+        <figure>
+          <img src="logo.png.jpeg" alt="School logo">
+          <figcaption>School Logo</figcaption>
+        </figure>
+        <figure>
+          <img src="school-bg.jpg.jpeg" alt="Classroom activity">
+          <figcaption>Classroom Activity</figcaption>
+        </figure>
+        <figure>
+          <img src="logo.png.jpeg" alt="Assembly">
+          <figcaption>School Assembly</figcaption>
+        </figure>
+        <figure>
+          <img src="school-bg.jpg.jpeg" alt="Students learning">
+          <figcaption>Students Learning</figcaption>
+        </figure>
+        <figure>
+          <img src="logo.png.jpeg" alt="Event highlight">
+          <figcaption>Event Highlight</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <span class="close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <footer>
+    <p class="motto">"Bedrock of Excellence"</p>
+    <p>&copy; 2026 Life Fountain College. All rights reserved.</p>
+  </footer>
+
+<script>
+  document.querySelectorAll('#galleryGrid img').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      const lb=document.getElementById('lightbox');
+      const lbi=document.getElementById('lightboxImg');
+      lbi.src = img.src;
+      lb.style.display='flex';
+    });
+  });
+  function closeLightbox(e){
+    // close when clicked outside image or on close icon
+    const lb=document.getElementById('lightbox');
+    if(e.target.id==='lightbox' || e.target.classList.contains('close')) lb.style.display='none';
+  }
+</script>
+</body>
+</html>
