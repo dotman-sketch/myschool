@@ -21,20 +21,21 @@ body {
   background-repeat: no-repeat;
 }
 
-/* ADMIN LINK */
-.admin-link {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #007bff;
+/* WELCOME BANNER */
+.welcome-banner {
+  background: rgba(0, 51, 102, 0.85);
   color: #fff;
-  padding: 8px 12px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600;
-  z-index: 1001;
+  padding: 10px 20px;
+  font-size: 15px;
+  margin-left: 220px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-.admin-link:hover { background: #0056b3; }
+
+.welcome-banner span {
+  color: #ffc107;
+  font-weight: 600;
+}
 
 /* HEADER */
 header {
@@ -113,15 +114,43 @@ section {
   border-radius: 8px;
 }
 
-.logout-btn {
+.action-btns {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.logout-btn {
   padding: 10px 20px;
   background: crimson;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
 }
+
+.logout-btn:hover { background: #a00; }
+
+.admin-btn {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.admin-btn:hover { background: #0056b3; }
 
 footer {
   background: #003366;
@@ -139,6 +168,7 @@ footer {
   header { padding-left: 60px; }
   header h1 { font-size: 1.6rem; }
   section { margin-left: 0; }
+  .welcome-banner { margin-left: 0; }
 }
 
 </style>
@@ -173,7 +203,6 @@ footer {
 
 <header>
   <h1>Life Fountain College</h1>
-  <a href="admin.html" class="admin-link">Admin</a>
   <div class="menu-icon" onclick="toggleMenu(event)">⋮</div>
 
   <div class="dropdown" id="menu">
@@ -182,6 +211,11 @@ footer {
     <a href="admissions.html">Admissions</a>
   </div>
 </header>
+
+<!-- WELCOME BANNER -->
+<div class="welcome-banner">
+  Welcome back, <span id="welcomeName"></span>
+</div>
 
 <section>
   <p>Where learning meets excellence.</p>
@@ -202,7 +236,10 @@ footer {
     </iframe>
   </div>
 
-  <button class="logout-btn" onclick="logout()">Log Out</button>
+  <div class="action-btns">
+    <a href="admin.html" class="admin-btn">Admin Panel</a>
+    <button class="logout-btn" onclick="logout()">Log Out</button>
+  </div>
 </section>
 
 <footer>
@@ -211,6 +248,12 @@ footer {
 </footer>
 
 <script>
+
+/* POPULATE WELCOME NAME */
+const user = sessionStorage.getItem('loggedInUser');
+if(user){
+  document.getElementById('welcomeName').textContent = user + '.';
+}
 
 /* LOGOUT */
 function logout(){
