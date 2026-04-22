@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LIFE FOUNTAIN COLLEGE - Sign Up</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,31 +24,30 @@
       content: "";
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.6);
       z-index: 0;
     }
 
     .signup-container {
       position: relative;
       z-index: 1;
-      background: rgba(0, 0, 0, 0.72);
+      background: rgba(0,0,0,0.72);
       padding: 36px 32px;
       border-radius: 12px;
       width: 100%;
       max-width: 380px;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .school-name {
       font-family: 'Montserrat', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 24px;
-      line-height: 1.5;
-      color: #fff;
+      line-height: 1.6;
     }
 
     .form-group {
@@ -63,7 +60,6 @@
       font-size: 12px;
       color: rgba(255,255,255,0.6);
       margin-bottom: 5px;
-      letter-spacing: 0.5px;
     }
 
     .form-group input {
@@ -84,13 +80,19 @@
       background: rgba(255,255,255,0.1);
     }
 
-    .form-group input::placeholder {
-      color: rgba(255,255,255,0.3);
+    .form-group input::placeholder { color: rgba(255,255,255,0.3); }
+
+    .password-hint {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      text-align: left;
+      margin-top: -8px;
+      margin-bottom: 10px;
     }
 
     .error-msg {
-      background: rgba(220, 53, 69, 0.18);
-      border: 1px solid rgba(220, 53, 69, 0.4);
+      background: rgba(220,53,69,0.18);
+      border: 1px solid rgba(220,53,69,0.4);
       color: #ff8a94;
       font-size: 13px;
       padding: 9px 12px;
@@ -101,8 +103,8 @@
     }
 
     .success-msg {
-      background: rgba(25, 135, 84, 0.18);
-      border: 1px solid rgba(25, 135, 84, 0.4);
+      background: rgba(25,135,84,0.18);
+      border: 1px solid rgba(25,135,84,0.4);
       color: #75e8a6;
       font-size: 13px;
       padding: 9px 12px;
@@ -110,14 +112,6 @@
       margin-bottom: 14px;
       display: none;
       text-align: left;
-    }
-
-    .password-hint {
-      font-size: 11px;
-      color: rgba(255,255,255,0.35);
-      text-align: left;
-      margin-top: -8px;
-      margin-bottom: 10px;
     }
 
     .btn-primary {
@@ -136,11 +130,7 @@
     }
 
     .btn-primary:hover { background: #0062cc; }
-    .btn-primary:active { background: #004fa3; }
-    .btn-primary:disabled {
-      background: #555;
-      cursor: not-allowed;
-    }
+    .btn-primary:disabled { background: #555; cursor: not-allowed; }
 
     .btn-secondary {
       width: 100%;
@@ -153,61 +143,53 @@
       font-size: 14px;
       font-family: 'Poppins', sans-serif;
       cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s;
     }
 
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.35);
-    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.07); }
 
     footer {
       position: relative;
       z-index: 1;
       text-align: center;
       padding: 14px 20px;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0,0,0,0.75);
       color: white;
       width: 100%;
       font-family: 'Montserrat', sans-serif;
       margin-top: 20px;
     }
 
-    footer .motto {
-      font-style: italic;
-      font-size: 13px;
-      opacity: 0.9;
-    }
-
-    footer .copyright {
-      font-size: 11px;
-      margin-top: 4px;
-      opacity: 0.65;
-    }
+    footer .motto { font-style: italic; font-size: 13px; opacity: 0.9; }
+    footer .copyright { font-size: 11px; margin-top: 4px; opacity: 0.65; }
   </style>
 </head>
-
 <body>
 
   <div class="signup-container">
-    <p class="school-name">Create Your Account<br>Life Fountain College</p>
+    <p class="school-name">Create Account<br>Life Fountain College</p>
 
     <div class="error-msg"   id="errorMsg"></div>
     <div class="success-msg" id="successMsg"></div>
 
     <div class="form-group">
-      <label for="newUsername">Username</label>
-      <input type="text" id="newUsername" placeholder="Choose a username" autocomplete="username">
+      <label>Full Name</label>
+      <input type="text" id="newName" placeholder="Enter your full name" autocomplete="name">
     </div>
 
     <div class="form-group">
-      <label for="newPassword">Password</label>
+      <label>Email Address</label>
+      <input type="email" id="newEmail" placeholder="Enter your email" autocomplete="email">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
       <input type="password" id="newPassword" placeholder="Choose a password" autocomplete="new-password">
     </div>
     <p class="password-hint">Minimum 6 characters</p>
 
     <div class="form-group">
-      <label for="confirmPassword">Confirm Password</label>
+      <label>Confirm Password</label>
       <input type="password" id="confirmPassword" placeholder="Repeat your password" autocomplete="new-password">
     </div>
 
@@ -220,90 +202,79 @@
     <p class="copyright">&copy; 2026 Life Fountain College, Ago Are/Ofiki. All rights reserved.</p>
   </footer>
 
-  <script>
-    /* ── ALREADY LOGGED IN ── */
-    (function(){
-      if(sessionStorage.getItem('loggedInUser')){
-        window.location.replace('index.html');
-      }
-    })();
+<script>
+  /* ── ALREADY LOGGED IN ── */
+  if(sessionStorage.getItem('loggedInUser')){
+    window.location.replace('index.html');
+  }
 
-    /* ── HELPERS ── */
-    function showError(msg){
-      const el = document.getElementById('errorMsg');
-      el.textContent = msg;
-      el.style.display = 'block';
-      document.getElementById('successMsg').style.display = 'none';
+  function showError(msg){
+    const el = document.getElementById('errorMsg');
+    el.textContent = msg;
+    el.style.display = 'block';
+    document.getElementById('successMsg').style.display = 'none';
+  }
+
+  function showSuccess(msg){
+    const el = document.getElementById('successMsg');
+    el.textContent = msg;
+    el.style.display = 'block';
+    document.getElementById('errorMsg').style.display = 'none';
+  }
+
+  function createAccount(){
+    const name     = document.getElementById('newName').value.trim();
+    const email    = document.getElementById('newEmail').value.trim();
+    const password = document.getElementById('newPassword').value;
+    const confirm  = document.getElementById('confirmPassword').value;
+
+    document.getElementById('errorMsg').style.display   = 'none';
+    document.getElementById('successMsg').style.display = 'none';
+
+    if(!name || !email || !password || !confirm){
+      showError('Please fill in all fields.'); return;
+    }
+    if(name.length < 2){
+      showError('Name must be at least 2 characters.'); return;
+    }
+    if(password.length < 6){
+      showError('Password must be at least 6 characters.'); return;
+    }
+    if(password !== confirm){
+      showError('Passwords do not match.'); return;
     }
 
-    function showSuccess(msg){
-      const el = document.getElementById('successMsg');
-      el.textContent = msg;
-      el.style.display = 'block';
-      document.getElementById('errorMsg').style.display = 'none';
-    }
+    const btn = document.getElementById('signupBtn');
+    btn.disabled = true;
+    btn.textContent = 'Creating account…';
 
-    function clearMessages(){
-      document.getElementById('errorMsg').style.display   = 'none';
-      document.getElementById('successMsg').style.display = 'none';
-    }
-
-    /* ── CREATE ACCOUNT ── */
-    function createAccount(){
-      const username = document.getElementById('newUsername').value.trim();
-      const password = document.getElementById('newPassword').value;
-      const confirm  = document.getElementById('confirmPassword').value;
-      clearMessages();
-
-      if(!username || !password || !confirm){
-        showError('Please fill in all fields.');
-        return;
-      }
-      if(username.length < 3){
-        showError('Username must be at least 3 characters.');
-        return;
-      }
-      if(password.length < 6){
-        showError('Password must be at least 6 characters.');
-        return;
-      }
-      if(password !== confirm){
-        showError('Passwords do not match.');
-        return;
-      }
-
-      const btn = document.getElementById('signupBtn');
-      btn.disabled = true;
-      btn.textContent = 'Creating account…';
-
-      fetch('/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      })
-      .then(r => r.json())
-      .then(resp => {
-        if(resp.success){
-          showSuccess('Account created! Redirecting to login…');
-          setTimeout(() => window.location.replace('login.html'), 1500);
-        } else {
-          showError(resp.error || 'Could not create account.');
-          btn.disabled = false;
-          btn.textContent = 'Create Account';
-        }
-      })
-      .catch(() => {
-        showError('Network error. Make sure the server is running.');
+    fetch('/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password })
+    })
+    .then(r => r.json())
+    .then(resp => {
+      if(resp.success){
+        showSuccess('Account created! Redirecting to login…');
+        setTimeout(() => window.location.replace('login.html'), 1500);
+      } else {
+        showError(resp.error || 'Could not create account.');
         btn.disabled = false;
         btn.textContent = 'Create Account';
-      });
-    }
-
-    /* ── ENTER KEY ── */
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Enter') createAccount();
+      }
+    })
+    .catch(() => {
+      showError('Network error. Make sure the server is running.');
+      btn.disabled = false;
+      btn.textContent = 'Create Account';
     });
-  </script>
+  }
+
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Enter') createAccount();
+  });
+</script>
 
 </body>
 </html>
